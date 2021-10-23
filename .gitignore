@@ -1,0 +1,3 @@
+backend/bin
+.DS_Store
+*.db
