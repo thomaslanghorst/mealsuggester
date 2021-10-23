@@ -1,13 +1,13 @@
 # mealsuggester backend
 The mealsuggester is a small little helper I wrote to help me plan my meals for the week. This is the backend part written in golang. It is a simple REST service backed by a SQLite database. I am running it on my raspberry pi.
 
-### build for pi
+### build binary for pi
 `GOOS=linux GOARCH=arm go build -o ./bin/pi/mealsuggester`
 
-### copy to pi
+### copy binary to pi
 `scp ./bin/pi/mealsuggester <pi_user>@<pi_ip>:/path/on/your/pi`
 
-### rest calls
+### REST calls
 * list meals 
     `curl -X GET <pi_ip>:8081/meals?category=fast%20food`
 * create a meal
