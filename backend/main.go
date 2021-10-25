@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 	log "github.com/sirupsen/logrus"
 	_ "modernc.org/sqlite"
 )
@@ -36,8 +37,13 @@ func main() {
 	suggestionsRouter := router.PathPrefix("/suggestions").Subrouter()
 	suggestionsRouter.Path("").Methods("GET").HandlerFunc(mh.SuggestMeals)
 
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:8080"},
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
+	})
+
 	server := &http.Server{
-		Handler:     router,
+		Handler:     c.Handler(router),
 		Addr:        fmt.Sprintf(":%d", port),
 		ReadTimeout: 10 * time.Second,
 	}
